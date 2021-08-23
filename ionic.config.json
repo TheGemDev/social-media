@@ -1,0 +1,8 @@
+{
+  "name": "Social Media",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "ef3f0df5"
+}

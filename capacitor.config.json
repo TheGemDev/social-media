@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Social Media",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
