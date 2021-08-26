@@ -7,28 +7,29 @@ import {
   IonItem,
 } from "@ionic/react";
 import ExploreContainer from "../components/ExploreContainer";
-import "./Home.css";
+import "./Group.css";
 import HeaderContainer from "../components/HeaderContainer";
+import { CardExamples } from "../components/CardContainer";
 
-
-const Home: React.FC = () => {
+const Group: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <HeaderContainer name="Gabriel Momoh"/>
+          <HeaderContainer name='Gabriel Momoh' />
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse='condense'>
           <IonToolbar>
-            <IonTitle size='large'>Home</IonTitle>
+            <IonTitle size='large'>Group</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name='This is your Home Now' />
+
+        <ExploreContainer name='Yeah if you have a group of frez you should see them here' />
       </IonContent>
     </IonPage>
   );
 };
 
-export default Home;
+export default Group;

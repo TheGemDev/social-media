@@ -1,8 +1,9 @@
-import { Redirect, Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
   IonLabel,
+  IonLoading,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -15,14 +16,23 @@ import {
   chatboxEllipsesOutline,
   homeOutline,
   addCircleSharp,
-  addCircleOutline
+  addCircleOutline,
+  peopleCircleOutline,
+  discOutline,
+  chatboxEllipsesSharp,
 } from "ionicons/icons";
-import Home from "./pages/Home";
-import Post from "./pages/Post";
+import Group from "./pages/Group";
+import Status from "./pages/Status";
 import Chat from "./pages/Chat";
+import Profile from "./pages/Profile";
+import Login from "./pages/auth/Login";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./util/firebase";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
+
+import { observer, MobXProviderContext } from "mobx-react";
 
 /* Basic CSS for apps built with Ionic */
 import "@ionic/react/css/normalize.css";
@@ -38,43 +48,50 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 /* Theme variables */
-import "./theme/variables.css";
+import "./theme/DarkTheme.css";
+import { Start } from "./pages/Start";
+import React from "react";
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path='/home'>
-            <Home />
-          </Route>
-          <Route exact path='/post'>
-            <Post />
-          </Route>
-          <Route path='/chat'>
-            <Chat />
-          </Route>
-          <Route exact path='/'>
-            <Redirect to='/home' />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot='bottom'>
-          <IonTabButton tab='home' href='/home'>
-            <IonIcon icon={homeOutline} />
-            <IonLabel>Home</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab='post' href='/post'>
-            <IonIcon icon={addCircleOutline} />
-            <IonLabel>Post</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab='chat' href='/chat'>
-            <IonIcon icon={chatboxEllipsesOutline} />
-            <IonLabel>Chat</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  const [user] = useAuthState(auth);
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path='/group' component={Group} />
+
+            <Route exact path='/status' component={Status} />
+
+            <Route path='/chat' component={Login} />
+
+            <Route path='/profile' component={Profile} />
+
+            <Route path='/login' component={Login} />
+
+            <Route exact path='/'>
+              <Redirect to='/chat' />
+            </Route>
+          </IonRouterOutlet>
+
+          <IonTabBar slot='bottom'>
+            <IonTabButton tab='chat' href='/chat'>
+              <IonIcon icon={chatboxEllipsesOutline} />
+              <IonLabel>Chat</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab='group' href='/group'>
+              <IonIcon icon={peopleCircleOutline} />
+              <IonLabel>Group</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab='status' href='/status'>
+              <IonIcon icon={discOutline} />
+              <IonLabel>Status</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;

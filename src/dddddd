@@ -1,0 +1,38 @@
+<IonReactRouter>
+      <IonTabs>
+        <IonRouterOutlet>
+          <Route exact path='/group' component={Group} />
+
+          <Route exact path='/status' component={Status} />
+
+          <Route path='/chat' component={Start} />
+
+          <Route path='/profile' component={Profile} />
+
+          <Route path='/login' component={Login} />
+
+          <Route exact path='/'>
+            <Redirect to='/chat' />
+          </Route>
+        </IonRouterOutlet>
+
+        <IonTabBar slot='bottom'>
+          <IonTabButton tab='chat' href='/chat'>
+            <IonIcon icon={chatboxEllipsesOutline} />
+            <IonLabel>Chat</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab='group' href='/group'>
+            <IonIcon icon={peopleCircleOutline} />
+            <IonLabel>Group</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab='status' href='/status'>
+            <IonIcon icon={discOutline} />
+            <IonLabel>Status</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
+      </IonTabs>
+    </IonReactRouter>
+
+
+
+     <section>{user ? <Chat /> : <Login />}</section>
