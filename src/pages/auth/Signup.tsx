@@ -17,16 +17,12 @@ import {
   IonText,
 } from "@ionic/react";
 import firebase from "firebase";
-//import firebase from "firebase";
 import { logoGoogle, personCircle } from "ionicons/icons";
 
-import { Join } from "../../components/authButton/authbutton";
+import { Join, SignIn } from "../../components/authButton/authbutton";
 import { auth } from "../../util/firebase";
 
-//import { auth } from "../../util/firebase";
-import Signup from "./Signup";
-
-const Login: React.FC = () => {
+const Signup: React.FC = () => {
   return (
     <>
       <Join />
@@ -53,7 +49,7 @@ const Login: React.FC = () => {
             <IonRow>
               <IonCol>
                 <p style={{ fontSize: "small" }}>
-                  By clicking LOGIN you agree to our <a href='#'>Policy</a>
+                  By clicking SIGNUP you agree to our <a href='#'>Policy</a>
                 </p>
 
                 <IonButton
@@ -65,10 +61,10 @@ const Login: React.FC = () => {
                     auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
                   }>
                   <IonIcon slot='start' icon={logoGoogle} />
-                  Login
+                  SIGNUP
                 </IonButton>
                 <p style={{ fontSize: "medium" }}>
-                  Don't have an account? <a href='/signup'>Sign up!</a>
+                  Don't have an account? <a href='#'>SIGNUP</a>
                 </p>
               </IonCol>
             </IonRow>
@@ -86,4 +82,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Signup;

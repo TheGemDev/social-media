@@ -16,16 +16,9 @@ import {
   IonFooter,
   IonText,
 } from "@ionic/react";
-import firebase from "firebase";
-//import firebase from "firebase";
-import { logoGoogle, personCircle } from "ionicons/icons";
+import { personCircle } from "ionicons/icons";
 
-import { Join } from "../../components/authButton/authbutton";
-import { auth } from "../../util/firebase";
-
-//import { auth } from "../../util/firebase";
-import Signup from "./Signup";
-
+import { Join, SignIn } from "../../components/authButton/authbutton";
 const Login: React.FC = () => {
   return (
     <>
@@ -36,18 +29,37 @@ const Login: React.FC = () => {
             <IonRow>
               <IonCol>
                 <IonIcon
-                  style={{ fontSize: "200px", color: "#0040ff" }}
+                  style={{ fontSize: "70px", color: "#0040ff" }}
                   icon={personCircle}
                 />
               </IonCol>
             </IonRow>
             <IonRow>
-              <IonCol></IonCol>
+              <IonCol>
+                <IonItem>
+                  <IonLabel position='floating'> Email</IonLabel>
+                  <IonInput
+                    type='email'
+                    /*
+                    value={email}
+                    onIonChange={(e) => setEmail(e.detail.value!)}*/
+                  ></IonInput>
+                </IonItem>
+              </IonCol>
             </IonRow>
 
             <IonRow>
               <IonCol>
-                <IonItem></IonItem>
+                <IonItem>
+                  <IonLabel position='floating'> Password</IonLabel>
+                  <IonInput
+                    type='password'
+                    /*value={password}
+                    onIonChange={(e) =>
+                      setPassword(e.detail.value!)
+                    }*/
+                  ></IonInput>
+                </IonItem>
               </IonCol>
             </IonRow>
             <IonRow>
@@ -55,27 +67,20 @@ const Login: React.FC = () => {
                 <p style={{ fontSize: "small" }}>
                   By clicking LOGIN you agree to our <a href='#'>Policy</a>
                 </p>
-
                 <IonButton
                   expand='block'
-                  draggable='true'
-                  size='default'
-                  fill='outline'
-                  onClick={() =>
-                    auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-                  }>
-                  <IonIcon slot='start' icon={logoGoogle} />
+                  /*onClick={handleLogin}*/ href="/chat">
                   Login
                 </IonButton>
                 <p style={{ fontSize: "medium" }}>
-                  Don't have an account? <a href='/signup'>Sign up!</a>
+                  Don't have an account? <a href='#'>Sign up!</a>
                 </p>
               </IonCol>
             </IonRow>
           </IonGrid>
         </IonContent>
         <IonRow>
-          <IonCol className='ion-text-center'>
+          <IonCol>
             <IonFooter>
               <p style={{ fontSize: "medium" }}>Version 1.0.0</p>
             </IonFooter>

@@ -6,9 +6,10 @@ import {
   IonBadge,
   IonRoute,
   IonRouterLink,
-  IonBackButton
+  IonBackButton,
 } from "@ionic/react";
 import { auth } from "../util/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 //import Profile from "./pages/Profile";
 
 interface ContainerProps {
@@ -19,12 +20,17 @@ const HeaderContainer: React.FC<ContainerProps> = ({ name }) => {
   const user = auth.currentUser;
   return (
     <div className='container'>
-      <IonRouterLink href="/profile">
+      <IonRouterLink href='/profile'>
         <IonChip>
           <IonAvatar>
-            <img src='https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y' />
+            <img
+              src={
+                user?.photoURL ||
+                "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+              }
+            />
           </IonAvatar>
-          <IonLabel>{user}</IonLabel>
+          <IonLabel>{user?.displayName}</IonLabel>
         </IonChip>
         <IonBadge style={{ position: "absolute" }}>35</IonBadge>
       </IonRouterLink>

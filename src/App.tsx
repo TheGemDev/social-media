@@ -20,6 +20,7 @@ import {
   peopleCircleOutline,
   discOutline,
   chatboxEllipsesSharp,
+  chatboxEllipses,
 } from "ionicons/icons";
 import Group from "./pages/Group";
 import Status from "./pages/Status";
@@ -31,8 +32,6 @@ import { auth } from "./util/firebase";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
-
-import { observer, MobXProviderContext } from "mobx-react";
 
 /* Basic CSS for apps built with Ionic */
 import "@ionic/react/css/normalize.css";
@@ -51,8 +50,9 @@ import "@ionic/react/css/display.css";
 import "./theme/DarkTheme.css";
 import { Start } from "./pages/Start";
 import React from "react";
+import Signup from "./pages/auth/Signup";
 
-const App: React.FC = () => {
+const Main: React.FC = () => {
   const [user] = useAuthState(auth);
   return (
     <IonApp>
@@ -63,11 +63,13 @@ const App: React.FC = () => {
 
             <Route exact path='/status' component={Status} />
 
-            <Route path='/chat' component={Login} />
+            <Route path='/chat' component={Chat} />
 
             <Route path='/profile' component={Profile} />
 
             <Route path='/login' component={Login} />
+
+            <Route path='/signup' component={Signup} />
 
             <Route exact path='/'>
               <Redirect to='/chat' />
@@ -90,8 +92,10 @@ const App: React.FC = () => {
           </IonTabBar>
         </IonTabs>
       </IonReactRouter>
+
+      <section>{user ? <Chat /> : <Login />}</section>
     </IonApp>
   );
 };
 
-export default App;
+export default Main;

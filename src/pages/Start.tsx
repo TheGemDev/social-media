@@ -16,23 +16,24 @@ import business from "../res/business.svg";
 import learning from "../res/learning.svg";
 import video from "../res/video-calling.svg";
 import year from "../res/new-year.svg";
+import Login from "./auth/Login";
 // Optional parameters to pass to the swiper instance.
 // See http://idangero.us/swiper/api/ for valid options.
 const slideOpts = {
-  initialSlide: 1,
+  initialSlide: 0,
   speed: 400,
 };
 
 export const Start: React.FC = () => (
   <IonApp>
     <IonContent fullscreen class='ion-padding' scroll-y='false'>
-      <IonSlides>
+      <IonSlides pager={true} options={slideOpts}>
         <IonSlide>
           <div className='slide'>
             <img src={business} />
             <h2>Welcome</h2>
             <p>
-              The <b>Messenger</b> of the future
+              To the <b>Messenger</b> of the future
             </p>
           </div>
         </IonSlide>
@@ -51,7 +52,7 @@ export const Start: React.FC = () => (
           <p>
             <b>One Step</b> at a time
           </p>
-          <IonButton fill='solid'>
+          <IonButton fill='outline' href="/app">
             Join <IonIcon icon={arrowForwardOutline}></IonIcon>
           </IonButton>
         </IonSlide>
