@@ -1,4 +1,4 @@
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
@@ -22,13 +22,8 @@ import {
   chatboxEllipsesSharp,
   chatboxEllipses,
 } from "ionicons/icons";
-import Group from "./pages/Group";
-import Status from "./pages/Status";
-import Chat from "./pages/Chat";
-import Profile from "./pages/Profile";
+
 import Login from "./pages/auth/Login";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "./util/firebase";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -51,51 +46,39 @@ import "./theme/DarkTheme.css";
 import { Start } from "./pages/Start";
 import React from "react";
 import Signup from "./pages/auth/Signup";
+import { AuthContext, useAuthInit } from "./util/auth";
+import AppTabs from "./components/AppTabs";
+import NotFoundPage from "./pages/NotFoundPage";
 
-const Main: React.FC = () => {
-  const [user] = useAuthState(auth);
+const App: React.FC = () => {
+  const { loading, auth } = useAuthInit();
+  if (loading) {
+    return <IonLoading isOpen />;
+  }
+  console.log(`rendering App with auth:`, auth);
   return (
     <IonApp>
-      <IonReactRouter>
-        <IonTabs>
-          <IonRouterOutlet>
-            <Route exact path='/group' component={Group} />
-
-            <Route exact path='/status' component={Status} />
-
-            <Route path='/chat' component={Chat} />
-
-            <Route path='/profile' component={Profile} />
-
-            <Route path='/login' component={Login} />
-
-            <Route path='/signup' component={Signup} />
-
-            <Route exact path='/'>
-              <Redirect to='/chat' />
+      <AuthContext.Provider value={auth}>
+        <IonReactRouter>
+          <Switch>
+            <Route exact path='/login'>
+              <Login />
             </Route>
-          </IonRouterOutlet>
-
-          <IonTabBar slot='bottom'>
-            <IonTabButton tab='chat' href='/chat'>
-              <IonIcon icon={chatboxEllipsesOutline} />
-              <IonLabel>Chat</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab='group' href='/group'>
-              <IonIcon icon={peopleCircleOutline} />
-              <IonLabel>Group</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab='status' href='/status'>
-              <IonIcon icon={discOutline} />
-              <IonLabel>Status</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
-      </IonReactRouter>
-
-      <section>{user ? <Chat /> : <Login />}</section>
+            <Route exact path='/signup'>
+              <Signup />
+            </Route>
+            <Route path='/my'>
+              <AppTabs />
+            </Route>
+            <Redirect exact path='/' to='/my/chat' />
+            <Route>
+              <NotFoundPage />
+            </Route>
+          </Switch>
+        </IonReactRouter>
+      </AuthContext.Provider>
     </IonApp>
   );
 };
 
-export default Main;
+export default App;

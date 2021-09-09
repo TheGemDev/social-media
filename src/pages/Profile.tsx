@@ -10,7 +10,9 @@ import {
   IonBadge,
   IonBackButton,
   IonButtons,
+  IonButton,
 } from "@ionic/react";
+import { auth } from "../util/firebase";
 
 const Profile: React.FC = () => {
   return (
@@ -18,7 +20,7 @@ const Profile: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot='start'>
-            <IonBackButton defaultHref='chat' />
+            <IonBackButton defaultHref='/my/chat' />
           </IonButtons>
         </IonToolbar>
       </IonHeader>
@@ -31,6 +33,11 @@ const Profile: React.FC = () => {
           <IonLabel>Theme</IonLabel>
           <IonToggle slot='end' name='theme' color='dark'></IonToggle>
         </IonItem>
+      </IonContent>
+      <IonContent className='ion-padding'>
+        <IonButton color='medium' expand='block' onClick={() => auth.signOut()}>
+          Logout
+        </IonButton>
       </IonContent>
     </IonPage>
   );

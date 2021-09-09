@@ -15,21 +15,43 @@ import {
   IonInput,
   IonFooter,
   IonText,
+  IonLoading,
 } from "@ionic/react";
 import firebase from "firebase";
 //import firebase from "firebase";
 import { logoGoogle, personCircle } from "ionicons/icons";
 
-import { Join } from "../../components/authButton/authbutton";
 import { auth } from "../../util/firebase";
+
+import React, { useState } from "react";
+import { Redirect } from "react-router";
+import { useAuth } from "../../util/auth";
 
 //import { auth } from "../../util/firebase";
 import Signup from "./Signup";
 
 const Login: React.FC = () => {
+  const { loggedIn } = useAuth();
+  const [status, setStatus] = useState({ loading: false, error: false });
+
+  const handleLogin = async () => {
+    try {
+      setStatus({ loading: true, error: false });
+      const credential = await auth.signInWithPopup(
+        new firebase.auth.GoogleAuthProvider()
+      );
+      console.log("credential:", credential);
+    } catch (error) {
+      setStatus({ loading: false, error: true });
+      console.log("error:", error);
+    }
+  };
+
+  if (loggedIn) {
+    return <Redirect to='/my/chat' />;
+  }
   return (
     <>
-      <Join />
       <IonPage>
         <IonContent fullscreen className='ion-padding ion-text-center'>
           <IonGrid>
@@ -61,18 +83,17 @@ const Login: React.FC = () => {
                   draggable='true'
                   size='default'
                   fill='outline'
-                  onClick={() =>
-                    auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-                  }>
+                  onClick={handleLogin}>
                   <IonIcon slot='start' icon={logoGoogle} />
                   Login
                 </IonButton>
-                <p style={{ fontSize: "medium" }}>
-                  Don't have an account? <a href='/signup'>Sign up!</a>
-                </p>
+                <IonButton expand='block' fill='clear' routerLink='/signup'>
+                  Don't have an account?
+                </IonButton>
               </IonCol>
             </IonRow>
           </IonGrid>
+          <IonLoading isOpen={status.loading} />
         </IonContent>
         <IonRow>
           <IonCol className='ion-text-center'>

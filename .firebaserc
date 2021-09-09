@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "social-media-5228e"
+  },
+  "targets": {
+    "social-media-5228e": {
+      "hosting": {
+        "gemmessenger": [
+          "gemmessenger"
+        ]
+      }
+    }
+  }
+}
