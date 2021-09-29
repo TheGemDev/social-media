@@ -76,7 +76,7 @@ const Status: React.FC = () => {
             <IonFabButton onClick={() => takePhoto()}>
               <IonIcon icon={videocam} />
             </IonFabButton>
-            <IonFabButton>
+            <IonFabButton routerLink='/my/entries/add'>
               <IonIcon icon={documentAttach} />
             </IonFabButton>
           </IonFabList>

@@ -30,6 +30,7 @@ import "@ionic/react/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
 import "@ionic/react/css/normalize.css";
+
 import "@ionic/react/css/structure.css";
 import "@ionic/react/css/typography.css";
 
@@ -42,13 +43,16 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 /* Theme variables */
-import "./theme/DarkTheme.css";
+import "./theme/LightTheme.css";
 import { Start } from "./pages/Start";
 import React from "react";
 import Signup from "./pages/auth/Signup";
 import { AuthContext, useAuthInit } from "./util/auth";
 import AppTabs from "./components/AppTabs";
 import NotFoundPage from "./pages/NotFoundPage";
+import Call from "./pages/Call";
+import Chat from "./pages/Chat";
+import Moments from "./pages/Moments";
 
 const App: React.FC = () => {
   const { loading, auth } = useAuthInit();
@@ -80,5 +84,6 @@ const App: React.FC = () => {
     </IonApp>
   );
 };
+
 
 export default App;

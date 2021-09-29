@@ -26,7 +26,7 @@ const Group: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        <ExploreContainer name='Yeah if you have a group of frez you should see them here' />
+        <ExploreContainer name='Yeah if you have frenz you should see them here' />
       </IonContent>
     </IonPage>
   );

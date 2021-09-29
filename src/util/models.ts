@@ -4,6 +4,7 @@ export interface Entry {
   id: string;
   date: string;
   title: string;
+  name: string;
   pictureUrl: string;
   description: string;
 }

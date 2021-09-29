@@ -7,16 +7,21 @@ import {
   IonTabs,
 } from "@ionic/react";
 import {
+  callOutline,
   chatboxEllipsesOutline,
   discOutline,
   peopleCircleOutline,
 } from "ionicons/icons";
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
+import Call from "../pages/Call";
 import Chat from "../pages/Chat";
 import Group from "../pages/Group";
+import Moments from "../pages/Moments";
 import Profile from "../pages/Profile";
 import Status from "../pages/Status";
+import AddEntryPage from "../pages/status/AddEntryPage";
+import EntryPage from "../pages/status/EntryPage";
 import { useAuth } from "../util/auth";
 
 const AppTabs: React.FC = () => {
@@ -31,10 +36,10 @@ const AppTabs: React.FC = () => {
           <Chat />
         </Route>
         <Route exact path='/my/entries/add'>
-          <Status />
+          <AddEntryPage />
         </Route>
         <Route exact path='/my/entries/view/:id'>
-          <Status />
+          <EntryPage />
         </Route>
         <Route exact path='/my/profile'>
           <Profile />
@@ -42,8 +47,20 @@ const AppTabs: React.FC = () => {
         <Route exact path='/my/group'>
           <Group />
         </Route>
+        <Route exact path='/my/moments'>
+          <Moments />
+        </Route>
         <Route exact path='/my/status'>
           <Status />
+        </Route>
+        <Route exact path='/my/call'>
+          <Call />
+        </Route>
+        <Route exact path='/my/entries/add'>
+          <AddEntryPage />
+        </Route>
+        <Route exact path='/my/entries/view/:id'>
+          <EntryPage />
         </Route>
       </IonRouterOutlet>
       <IonTabBar slot='bottom'>
@@ -55,9 +72,13 @@ const AppTabs: React.FC = () => {
           <IonIcon icon={peopleCircleOutline} />
           <IonLabel>Group</IonLabel>
         </IonTabButton>
-        <IonTabButton tab='status' href='/my/status'>
+        <IonTabButton tab='status' href='/my/moments'>
           <IonIcon icon={discOutline} />
-          <IonLabel>Status</IonLabel>
+          <IonLabel>Moments</IonLabel>
+        </IonTabButton>
+        <IonTabButton tab='call' href='/my/call'>
+          <IonIcon icon={callOutline} />
+          <IonLabel>Calls</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

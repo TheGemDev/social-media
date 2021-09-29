@@ -3,7 +3,7 @@ http://ionicframework.com/docs/theming/ */
 
 :root {
   /** primary **/
-  --ion-color-primary: #b7afff;
+  --ion-color-primary: rgb(185, 43, 150);
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;

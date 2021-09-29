@@ -32,10 +32,10 @@ const HeaderContainer: React.FC<ContainerProps> = ({ name }) => {
               }
             />
           </IonAvatar>
-          <IonLabel>{user?.displayName}</IonLabel>
+
+          <IonLabel className='ion-text-wrap'>{user?.displayName}</IonLabel>
         </IonChip>
         <IonBadge style={{ position: "absolute" }}>35</IonBadge>
-        
       </IonRouterLink>
     </div>
   );
